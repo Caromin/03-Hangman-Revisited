@@ -12,11 +12,11 @@
 
 <body>
 <div class="jumbotron">
-	<h3 class="h2">Welcome to my first reattempt on the classic hangman homework I failed miserably at just a few months ago!</h3>
-		<small>I did not spend a ton of time ironing out the small details html/css wise for reattempts at my old homework, but I hope you enjoy and take a peak at the code.</small>
+	<h3 class="h2">Welcome to my reattempt on the classic hangman homework that I failed miserably at just a few months ago!</h3>
+		<small class="indent">I did not spend a ton of time ironing out the small details html/css wise for reattempts at my old homework and if you peak at my other homework, they might look similar in hmtl design, but I hope you enjoy and take a peak at the code.</small>
 		<small>Please, take a look at my github and web profile to see the history of coding, mostly javascript projects I have worked on. 
-			<br><br><button class="btn btn-link indent">Github</button>
-			<br><button class="btn btn-link indent">Personal Web Portfolio</button>
+			<br><br><button class="btn btn-link indent" onclick="window.open('https://github.com/Caromin')">Github</button>
+			<br><button class="btn btn-link indent" onclick="window.open('https://caromin.github.io/Caromin-WebPortfolio/')">Personal Web Portfolio</button>
 		</small>
 </div>	
 <div class="container">
@@ -28,18 +28,17 @@
 		 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</div><br />
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cumque reiciendis unde illum, similique! Qui laboriosam ducimus fuga, aut recusandae ipsam mollitia fugiat error facilis, libero iure, aspernatur. Asperiores, rerum.
+		</div>
 		<br /><br />
 		<div class="row">
 			<div class="col">
-				<p>Lives Remaining: </p><p id="livesLeft"></p>
+				<p>Lives Remaining: </p><br /><p id="livesLeft">?</p>
 			</div>
 			<div class="col">
-				<p>Total Wins: </p><p id="totalWins"></p>
+				<p>Total Wins: </p><br /><p id="totalWins">?</p>
 			</div>
 			<div class="col">
-				<p>Total Losses</p><p id=totalLosses></p>
+				<p>Total Losses: </p><br /><p id=totalLosses>?</p>
 			</div>	
 			<div class="col">
 				<p><button id="restartGame" class="btn btn-link">Restart?</button><p>
@@ -52,10 +51,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<p id="answerDiv">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veritatis, natus ducimus eveniet, nulla quisquam magnam perspiciatis delectus expedita porro, aliquid qui possimus exercitationem unde nostrum maiores! Distinctio, architecto, minima.</p>
+				<div class="row"><p>Guesses: </p><br><br></div>
+				<span id="guessesDiv"></p>
+				<span id="answerDiv">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci veritatis, natus ducimus eveniet, nulla quisquam magnam perspiciatis delectus expedita porro, aliquid qui possimus exercitationem unde nostrum maiores! Distinctio, architecto, minima.</p>
 			</div>
 			<div class="col">
-				<span id="hangmanImg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nulla dolorem molestias temporibus cum quaerat beatae nam aspernatur error nisi. Pariatur distinctio, aut saepe ratione quidem fugiat omnis sit nam.</span>
+				<div class="row"><p>Image: </p><br><br></div>
+					<span id="hangmanImg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nulla dolorem molestias temporibus cum quaerat beatae nam aspernatur error nisi. Pariatur distinctio, aut saepe ratione quidem fugiat omnis sit nam.</span>
 			</div>	
 	</div>
 </div>
