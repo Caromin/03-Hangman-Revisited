@@ -16,3 +16,7 @@ body {
 .jumbotron {
 	color: #000000;
 }
+
+#hangmanWord {
+	margin-top: 10%;
+}
