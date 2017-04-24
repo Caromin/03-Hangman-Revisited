@@ -56,6 +56,7 @@ function replacingDisplay(which) {
 			$('#totalWins').html(wins);
 			alert("You won! The answer was " + word + "!");
 			$('#hangmanWord').addClass("text-success");
+			thanksForPlay();
 // setting it equal to 0 so that the keypress below will not work anymore			
 			livesRemaining = 0;
 		}
@@ -75,6 +76,7 @@ function replacingDisplay(which) {
 				$('#hangmanWord').addClass("text-danger");
 				losses++;
 				$('#totalLosses').html(losses);
+				thanksForPlay();
 		}
 		}
 	}
@@ -114,3 +116,8 @@ $(window).keypress(function(event){
 	replacingDisplay(event.which); 
 	}
 });
+
+function thanksForPlay() {
+	$("#hangmanImg").html("</p>Thanks for playing my demo, please check out my other works on the links above.</p>");
+	$("#hangmanImg").addClass("h2");
+}
