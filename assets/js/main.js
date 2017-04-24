@@ -1,6 +1,8 @@
+// global variables
 var random = [ "twice", "aoa", "gfriend", "pristin", "running man", "knowing bros"]
 var losses = 0;
 var wins = 0;
+var livesRemaining = 10;
 var word = "";
 var answer = [];
 var underScoreArray = [];
@@ -22,124 +24,62 @@ function generateUnderscore(word) {
 		underScoreArray.splice(i, 1, "_");
 	}
 // once the array is spliced I join the arrays with " " instead of ,'s
-	underScoreArray = underScoreArray.join(" ");
+	// underScoreArray = underScoreArray.join(" ");
 //console.logging to confirm changes	
 	console.log(underScoreArray);
-//messing around with javascript to identify the Id	
+// messing around with javascript to identify the Id	
 	document.getElementById("hangmanWord").innerHTML= underScoreArray;
-//adding classes to the Id section
+// adding classes to the Id section
 	$("#hangmanWord").addClass("text-center h2");
 		return underScoreArray;
 	}
 
-function checkingLetters(keyCode) {
-	console.log("checkingLetters() check: " + keyCode);
+// checks the keypress and updates the info if the letter exists
+function replacingDisplay(which) {
 	for (i = 0; i <answer.length; i++) {
-		console.log(answer[i].charCodeAt());
-		if (keyCode === answer[i].charCodeAt()) {
-			console.log("i found it in the array!");
-	} else {
-		console.log("i did not find it in the array!");
-		
-		}
+		if (which === answer[i].charCodeAt()) {
+		// console.log(answer[i].charCodeAt());
+			console.log("yes it matches!");
+			var event = String.fromCharCode(which);
+			underScoreArray.splice(i, 1, event.toString());
+			document.getElementById("hangmanWord").innerHTML= underScoreArray;
+		} 
 	}
-
 }
 
-function endScreen() {
-
+// restarts the game and updates the display
+function RestartGame() {	
+	pickRandom();
+	generateUnderscore(word);
+	livesRemaining = 10;
+	$('#livesLeft').html(livesRemaining);
+	$(window).keypress(function(event){
+		if (livesRemaining === 0) {
+			return false;
+		} else {
+		replacingDisplay(event.which); 
+		}
+	});
+	console.log(answer);
 }
 
-function restartGame() {
+// button to start game and hide the button
+$('#startBtn').on('click', function() {
+	$('#startBtn').hide();
+	RestartGame();
+})
 
-
-}
-
-
-// runs the game on load
-$(window).on("load", function() {
-  pickRandom();
-  // checking to see if the word gets passed over  generateUnderscore(word);
-  generateUnderscore(word);
-
-  $(window).on("keyup", function(event){
-    	checkingLetters(event.keyCode);
-    });
-  console.log(answer);
-  
+// restarts the game with lives refreshed, but total wins/losses remaining
+$('#restartGame').on('click', function() {
+	RestartGame();
 });
 
 
-
-
-
-
-
-
-
-
-
-
-//    // Hangman
-//   canvas =  function(){
-
-//     myStickman = document.getElementById("stickman");
-//     context = myStickman.getContext('2d');
-//     context.beginPath();
-//     context.strokeStyle = "#fff";
-//     context.lineWidth = 2;
-//   };
-  
-//     head = function(){
-//       myStickman = document.getElementById("stickman");
-//       context = myStickman.getContext('2d');
-//       context.beginPath();
-//       context.arc(60, 25, 10, 0, Math.PI*2, true);
-//       context.stroke();
-//     }
-    
-//   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-    
-//     context.moveTo($pathFromx, $pathFromy);
-//     context.lineTo($pathTox, $pathToy);
-//     context.stroke(); 
-// }
-
-//    frame1 = function() {
-//      draw (0, 150, 150, 150);
-//    };
-   
-//    frame2 = function() {
-//      draw (10, 0, 10, 600);
-//    };
-  
-//    frame3 = function() {
-//      draw (0, 5, 70, 5);
-//    };
-  
-//    frame4 = function() {
-//      draw (60, 5, 60, 15);
-//    };
-  
-//    torso = function() {
-//      draw (60, 36, 60, 70);
-//    };
-  
-//    rightArm = function() {
-//      draw (60, 46, 100, 50);
-//    };
-  
-//    leftArm = function() {
-//      draw (60, 46, 20, 50);
-//    };
-  
-//    rightLeg = function() {
-//      draw (60, 70, 100, 100);
-//    };
-  
-//    leftLeg = function() {
-//      draw (60, 70, 20, 100);
-//    };
-  
-//   drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
-
+	// if (which !== answer) {
+	// 	livesRemaining--;
+	// 	$('#livesLeft').html(livesRemaining);
+	// 	if (livesRemaining === 0) {
+	// 		alert("game over! answer was " + word);
+	// 		losses++;
+	// 		$('#totalLosses').html(losses);
+	// 	}
