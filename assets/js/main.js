@@ -28,7 +28,7 @@ function generateUnderscore(word) {
 //console.logging to confirm changes	
 	console.log(underScoreArray);
 // messing around with javascript to identify the Id	
-	document.getElementById("hangmanWord").innerHTML= underScoreArray;
+	document.getElementById("hangmanWord").innerHTML= underScoreArray.join(" ");
 // adding classes to the Id section
 	$("#hangmanWord").addClass("text-center h2");
 		return underScoreArray;
@@ -36,16 +36,40 @@ function generateUnderscore(word) {
 
 // checks the keypress and updates the info if the letter exists
 function replacingDisplay(which) {
+	var check = false;
+	var event = String.fromCharCode(which);
 	for (i = 0; i <answer.length; i++) {
-		if (which === answer[i].charCodeAt()) {
-		// console.log(answer[i].charCodeAt());
+		if (event === answer[i]) {
 			console.log("yes it matches!");
-			var event = String.fromCharCode(which);
-			underScoreArray.splice(i, 1, event.toString());
-			document.getElementById("hangmanWord").innerHTML= underScoreArray;
+			underScoreArray.splice(i, 1, event);
+			document.getElementById("hangmanWord").innerHTML= underScoreArray.join(" ");
+		check = true;
 		} 
 	}
+	if (check) {
+		if (answer.join(" ") === underScoreArray.join(" ")) {
+			alert("You won! answer was " + word);
+			wins++;
+			$('#totalWins').html(wins);
+			$(window).keypress(function(event){
+				if (livesRemaining === 0) {
+				return false;
+				}
+			});
+		} 
+	} else if (!check) {
+		livesRemaining--;
+		guessesArray.push(event);
+		$('#answerDiv').html(guessesArray.join(", "));
+		$('#livesLeft').html(livesRemaining);
+		if (livesRemaining === 0 ) {
+			alert("Game over! answer was " + word);
+			losses++;
+			$('#totalLosses').html(losses);
+		}
+	}
 }
+
 
 // restarts the game and updates the display
 function RestartGame() {	
@@ -53,13 +77,7 @@ function RestartGame() {
 	generateUnderscore(word);
 	livesRemaining = 10;
 	$('#livesLeft').html(livesRemaining);
-	$(window).keypress(function(event){
-		if (livesRemaining === 0) {
-			return false;
-		} else {
-		replacingDisplay(event.which); 
-		}
-	});
+	$('#answerDiv').html(" ");
 	console.log(answer);
 }
 
@@ -74,12 +92,10 @@ $('#restartGame').on('click', function() {
 	RestartGame();
 });
 
-
-	// if (which !== answer) {
-	// 	livesRemaining--;
-	// 	$('#livesLeft').html(livesRemaining);
-	// 	if (livesRemaining === 0) {
-	// 		alert("game over! answer was " + word);
-	// 		losses++;
-	// 		$('#totalLosses').html(losses);
-	// 	}
+$(window).keypress(function(event){
+	if (livesRemaining === 0) {
+		return false;
+	} else {
+	replacingDisplay(event.which); 
+	}
+});
