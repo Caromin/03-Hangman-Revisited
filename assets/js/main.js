@@ -48,19 +48,16 @@ function replacingDisplay(which) {
 	}
 	if (check) {
 		if (answer.join(" ") === underScoreArray.join(" ")) {
-			alert("You won! answer was " + word);
 			wins++;
 			$('#totalWins').html(wins);
-			$(window).keypress(function(event){
-				if (livesRemaining === 0) {
-				return false;
-				}
-			});
+			alert("You won! The answer was " + word + "!");
+			livesRemaining = 0;
 		} 
 	} else if (!check) {
 		livesRemaining--;
 		guessesArray.push(event);
 		$('#answerDiv').html(guessesArray.join(", "));
+		$('#answerDiv').addClass("text-danger h3");
 		$('#livesLeft').html(livesRemaining);
 		if (livesRemaining === 0 ) {
 			alert("Game over! answer was " + word);
